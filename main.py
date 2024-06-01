@@ -97,19 +97,22 @@ def ddoss(url, port, paket, timeout):
 
 def ipconfigs(url, port):
     try:
-        import socket, whois
+         import socket, whois
     except ImportError:
-        print(merah+' [<] Mengunduh python3-whois...'+reset)
-        if sys.platform in ['linux', 'linux2']:
-            mdl = requests.get('https://files.pythonhosted.org/packages/4c/3d/39cf14b4be3a931b1a77ae30b57ecdc11307d08b9e9586fda287ccd47aa1/python-whois-0.8.0.tar.gz')
-            with open('whois.tar.gz', 'wb') as who_is:
-                who_is.write(mdl)
-            os.system('sudo tar -xv whois.tar.gz')
-            os.system('sudo mv whois /lib/python3.11/')
-            os.system('sudo rm -r whois')
-            os.system('sudo apt install python3-future');sys.exit()
-        else:
-            os.system('pip install whois');sys.exit()
+         print(merah+' [<] Mengunduh python3-whois...'+reset)
+         if sys.platform in ['linux', 'linux2']:
+             mdl = requests.get('https://files.pythonhosted.org/packages/4c/3d/39cf14b4be3a931b1a77ae30b57ecdc11307d08b9e9586fda287ccd47aa1/python-whois-0.8.0.tar.gz')
+             if mdl.status_code = 200:
+                 with open('whois.tar.gz', 'wb') as who_is:
+                     who_is.write(mdl.content)
+                 os.system('sudo tar -xzf whois.tar.gz')
+                 os.system('sudo mv whois /lib/python3.11/')
+                 os.system('sudo rm -r whois')
+                 os.system('sudo apt install python3-future');sys.exit()
+             else: pass
+         else:
+             os.system('pip install whois');sys.exit()
+
 
     try:
         w = whois.whois(url)
